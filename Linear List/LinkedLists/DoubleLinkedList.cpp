@@ -31,6 +31,26 @@ bool InsertNextDNode(DNode *p, DNode *s){
 	p->next=s;
 	return true;
 }
+//删除p结点的后继节点
+bool DeleteNextDNode(DNode *p){
+	if (p==NULL)
+		return false;
+	DNode *q = p->next;
+	if (q==NULL)
+		return false;
+	p->next=q->next;
+	if (q->next != NULL)
+		q->next->prior=p;
+	free(q);
+	return true;
+}
+//销毁双链表
+void DestroyList(DLinklist &L){
+	while(L->next != NULL)
+		DeleteNextDNode(L);
+	free L;
+	L=NULL;
+}
 
 
 
